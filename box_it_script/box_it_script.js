@@ -1,3 +1,100 @@
+const fs = require('fs');
+const argArr = process.argv.slice(2)
+
+const boxIt = (argArr) => {
+    let arr = [...argArr]; // creating new instance of argArr
+    let returnArr = []; // array of final strings
+    let returnStr = ''; // returnStr will be the finall value returned. It will have every value of returnArr added.
+    let lArr = []; // array with values equeal to longest length of string in each column. 
+    // let n = 0;
+    // let csv = false // if csv file is used this value will be true
+    
+    // if (csv) { // kicks in if csv is true
+    //     for (let strArr in arr) {
+    //         for (let i in strArr) {
+    //             if (lArr[i]) {
+    //                 lArr[i] = (strArr[i].length > lArr[i]) ? strArr[i].length : lArr[i];
+    //                  // if lArr already has a value then checks if strArr[i] is bigger, if so it assignes
+    //                  // the higher value to lArr[i]
+    //             } else {
+    //                 lArr.push(strArr[i].length) // if lArr[i] doesn't exist then a assignes a 
+    //                                             // value of strArr[i].length
+    //             }
+    //         }
+    //     }
+    // } else { // kicks in if csv isn't true
+        for (let str of arr) {
+            if (!lArr[0]) {lArr.push(0)} // worded like this as I was making it compatible for if a csv was used.
+            lArr[0] = (str.length > lArr[0]) ? str.length : lArr[0];
+            // loops through arr to find highest length of all strings.
+        };
+    // };
+    let borderStr = `${'━'.repeat(lArr[0]+2)}`; // this code will be used often so assigning it as a variable
+    const drawTopBorder = () => {
+        // if (csv) { // kicks in if csv equals true
+        //     tempStr = ''; // tempStr is what will be pushed into returnArr
+        //     for (let i in lArr) {
+        //         if (i == (lArr -1)) { 
+        //             tempStr +=           // not finished. need to add symbols
+        //         }
+        //         returnArr.push(tempStr)
+        //     }
+        // }
+        returnArr.push(`┏${borderStr}┓\n`); // pushes top border into returnArr
+    };
+    const drawMiddleBorder = () => {
+        returnArr.push(`┣${borderStr}┫\n`); // pushes middle border into returnArr
+    };
+    const drawBottomBorder = () => {
+        returnArr.push(`┗${borderStr}┛`); // pushes bottom border into return Arr
+    };
+    const drawBarsAround = str => {
+        numDiff = lArr[0] > str.length ? lArr[0] - str.length : 0; // finding difference in length from longest string
+        returnArr.push(`┃ ${str}${' '.repeat(numDiff)} ┃\n`);
+        // pushes bars, string and spaces into returnArr
+    }
+    const draw = arr => { // this is for calling the previouse drawborder functions
+        drawTopBorder(); // only needs to be called once
+        for (let i in arr) {
+            if (i == (arr.length - 1)) {
+                drawBarsAround(arr[i]); // if final loop drawBarsAround is called on its own
+            } else {
+                drawBarsAround(arr[i]);
+                drawMiddleBorder(); // if not final loop drawMiddleBorder is called after drawBarsAround
+            };
+        };
+        drawBottomBorder(); // only needs to be called once
+    };
+    const returnArrToReturnStr = returnArr => { // gives values from returnArr to returnStr as a single string.
+        for (let str of returnArr) {
+            returnStr += str; // adds each value to returnStr
+        };
+    };
+
+    // if (arr[0].endsWith('.csv')) {
+    //     fs.readFile(`${argArr[0]}`, function(err, fileData) {
+    //         arr = []
+    //         let rowArr = fileData.toString()
+    //         rowArr = rowArr.split('\n')
+    //         for (let str of rowArr) {
+    //             let tempArr = str.split(',');
+    //             arr.push(tempArr);
+    //         }
+    //         console.log(rowArr)
+    //         console.log(arr)
+    //     })
+    // }
+    draw(arr); // calls all the border and bars around functions at once.
+    returnArrToReturnStr(returnArr); // adds all of returnArr values to returnStr as one string.
+
+    return returnStr;
+}
+
+// a = ['hello', 'how', 'are', 'you?']; // this was just for testing code.
+console.log(boxIt(argArr));
+
+
+
 
 
 
