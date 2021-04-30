@@ -1,4 +1,94 @@
+const fs = require('fs');
+let arr = process.argv.slice(2);
+let Turtle = require('./turtle_class.js')
 
+
+let fileName;
+if (arr[1]) {
+    let newArr = arr[0].split('=')
+    fileName = newArr[1] 
+    arr.shift();
+}
+
+if (arr.length > 0) {
+    directionsStr = arr[0];
+    const runTurtle = (directionsStr) => {
+        let directionsArr = directionsStr.split('-');
+        let tom;
+        if (directionsArr[0].length > 2) {
+            let nums = directionsArr[0].replace(/\D/g, '');
+            let arrXY = nums.split('');
+            arrXY[0] = parseInt(arrXY[0]);
+            arrXY[1] = parseInt(arrXY[1]);
+            tom = new Turtle(arrXY[0],arrXY[1]);
+            directionsArr.shift()
+        }
+        else {
+            tom = new Turtle(0,0);
+        }
+
+        // directionsArr is now be an array with sub arrays of [letter(-number)].
+        // the bellow for loop will now iterate through them, splitting them up
+        // by letter and number. letters will be compared to functions which will 
+        // then be called. if 'f' the number will be used as the argument.
+        
+        for (let i = 0; i < directionsArr.length; i++) {
+            
+            let currentLetter = directionsArr[i].slice().replace(/\d/g, '');
+            let currentNumber = parseInt(directionsArr[i].slice().replace(/\D/g, ''));
+            let funcArr = [currentLetter, currentNumber];
+            // let funcArr = directionsArr[i].split('');
+            // funcArr[0] = funcArr[0].toLowerCase();
+            if (funcArr[0] === 'f') {
+                funcArr.shift();
+                tom.forward(parseInt(funcArr.join('')));
+            }
+            else if (funcArr[0] === 'r') {
+                tom.right();
+            }
+            else if (funcArr[0] === 'l') {
+                tom.left();
+            }
+            else if (funcArr[0] === 'a') {
+                if (fileName) {
+                    fs.writeFile(`./${fileName}`, tom.allPoints(), function(err) {
+                        if(err) {
+                            return console.log(err);
+                        }
+                        console.log(`Drawing written to ${fineName}`)
+                    });
+                }
+                else {
+                console.log(tom.allPoints());
+                }
+            }
+            else if (funcArr[0] === 'p') {
+                if (fileName) {
+                    fs.writeFile(`./${fileName}`, tom.print(), function(err) {
+                        if(err) {
+                            return console.log(err);
+                        }
+                        console.log(`Drawing written to ${fileName}`)
+                    });
+                }
+                else {
+                console.log(tom.print());
+                }
+            }
+        }
+    };
+    console.log(runTurtle(directionsStr))
+}
+else {
+    const tom = new Turtle(3,3);
+    console.log(tom.right().right().forward(5)
+        .left().forward(4)
+        .left().forward(3)
+        .left().left().forward(3)
+        .left().forward(4)
+        .left().forward(5)
+        .print());
+}
 
 
 
