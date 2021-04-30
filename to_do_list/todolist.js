@@ -34,7 +34,7 @@ let obj = {
         this.n = parseInt(numArr.join('')); // assigning n the value of joined numArr.        
         if (this.l === 'd' || this.l === 'c') { // if delete or complete and second input is incorrect then prompt new input
             if (isNaN(this.n) || this.n > this.listArr.length -1) {
-                console.log(`\nIncorrect input.\n`);
+                console.log(`\nIncorrect input.`);
                 return this.questionFunc();
             }
         }
@@ -66,22 +66,23 @@ let obj = {
                 this.currentMessage = 'Completed'
                 return this.completeFunc(n);
             }
-            else {
-                console.log(`\nIncorrect format\n`)
-                return this.questionFunc(n)
-            }
+            // else {
+                // console.log(`\nIncorrect format\n`)
+                return // this.questionFunc(n)
+            // }
         }
         else if (l.startsWith('d')) {
             if (this.n === 0 || (this.n >= 0 && this.n < this.listArr.length)) {
                 // if statement makes sure n is a number and it's not higher than index of listArr
                 this.currentMessage = 'Deleted'
                 // this.n--
-                return this.deleteFunc(n)
+                this.deleteFunc(n)
+                return
             }
-            else {
-                console.log(`\nIncorrect format\n`)
-                return this.questionFunc(n)
-            }
+            // else {
+                // console.log(`\nIncorrect format\n`)
+                return // this.questionFunc(n)
+            // }
         }
         else if (l.startsWith('s')) {
             return this.saveFunc();
