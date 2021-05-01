@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+    <h1>Cohorts Index</h1>
+    <h2>Url: /cohorts/index</h2>
+    <div class='container-index'>
+        <% for(let cohort of cohorts) { %>
+            <div class='cohort'>
+                <span class='logo'><%= cohort.logoUrl %></span>
+                <span><%- cohort.name %></span>
+                <div><%- cohort.members %></div>
+                <a href='/cohorts/<%= cohort.id %>'>
+                    <button class='submit'>
+                        Show Cohort
+                    </button>
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+<%- include('../partials/footer') %>
+
+

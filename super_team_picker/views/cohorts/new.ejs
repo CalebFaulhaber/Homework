@@ -1,0 +1,27 @@
+<%- include('../partials/header') %> 
+    <h1>Cohorts New</h1>
+    <h2>Url: /cohorts/new</h2>
+    <form action="/cohorts" method="POST">
+        <div>
+            <label for='logoUrl'>LogoUrl<br></label>
+            <input type='text' name='logoUrl' placeholder='e.g. example.come/some.png'>
+        </div>
+        <div>
+            <label for='name'>Name</label>
+            <input type='text' name='name' placeholder='Flying Funks'>
+        </div>
+        <div>
+            <label for="members">Members<br></label>
+            <textarea
+                name='members' id='members' cols='60' rows='5'
+                placeholder="John Doe, Jane Doe, John Smith, Steve">
+            </textarea>
+        </div>
+        <input type='submit' value='Submit'>
+    </form>
+<%- include('../partials/footer') %> 
+
+
+
+
+
