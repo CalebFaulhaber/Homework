@@ -1,0 +1,27 @@
+<%- include('../partials/header') %> 
+    <div class='container_show'>
+        <div class='cohort'>
+            <div><%= cohort.name %></div>
+            <div><%= cohort.members %></div>
+            <a href="/cohorts/<%= cohort.id %>/edit"><button class="submit">Edit Cohort</button></a>
+            <form action="/cohorts/<%= cohort.id %>" method="POST">
+                <input type='hidden' name='_method' value="DELETE"/>
+                <input type="submit" class="submit" value="Delete Cohort"/>
+            </form>
+        </div>
+
+        <div>Method</div>
+        <input type="radio" id="team count" name="method" value="team count">
+        <label for="team count">Team Count</label><br>
+        <input type="radio" id="number per team" name="method" value="number per team">
+        <label for="number per team">Number Per Team</label><br>
+
+        <div>
+            <label for="quantity">Quantity<br></label>
+            <input type="text" name="quantity">
+        </div>
+        <input class="submit" type="submit" value="Assign Teams">
+    </div>
+<%- include('../partials/footer') %>
+
+

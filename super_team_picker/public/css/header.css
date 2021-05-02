@@ -1,0 +1,72 @@
+@import url('reset.css');
+
+/* html {
+    margin: 0;
+    padding: 0;
+} */
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 0;
+    padding: 0;;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    width: 100%;
+}
+.container_menu {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    width: 80%;
+}
+.menu-items {
+    padding-left: 6em;
+}
+.menu {
+    display: flex;
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+    /* border: solid black  1px; */
+    /* border-radius: 1px */
+}
+.nav {
+    display: flex;
+    background-color: white;
+    justify-content: space-around;
+    height: 10vh;
+    width: 100%;
+}
+.nav div {
+    display: flex;
+    height: 10vh;
+    align-items: center;
+}
+.button {
+    background-color: grey; 
+    margin: 1.5em;
+    color: lightgrey; 
+    font-weight: bolder; 
+    border-color:lightgrey; 
+    border-radius: 5px; 
+    width: 6em; 
+    height: 3em;
+}
+a {
+    text-decoration: none;
+}
+.cohort {
+    margin: 1.5em;
+    border-width: 1px, lightgrey, thin;
+    padding: 1.5em;
+    border-radius: 5px;
+}
+.logo {
+    width: 3em;
+    height: 3em;
+    border-radius: 45px;
+}

@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+    <h1>Edit Post</h1>
+    <h2>Url: /cohorts/edit</h2>
+    <form method="POST" action="/cohorts/<%= cohort.id %>">
+        <input type="hidden" name="_method" value="PUT"/>
+        <div class="">
+            <input type="url" class="" name="logoUrl" placeholder="e.g: http://img.com/myPic.jpg" value="<%= cohort.logoUrl %>"/>
+        </div>
+        <div class="">
+            <input type="text" class="" name="name" placeholder="Enter the name" value="<%= cohort.name %>"/>
+        </div>
+        <div class="">
+            <textarea class="" name="members" placeholder="Enter name of team members"><%= cohort.members %></textarea>
+        </div>
+        <input type="submit" class="" value="Submit"/>
+    </form>
+<%- include('../partials/footer') %>
+
+
