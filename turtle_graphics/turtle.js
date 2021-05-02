@@ -1,19 +1,38 @@
-const fs = require('fs');
 let arr = process.argv.slice(2);
-let Turtle = require('./turtle_class.js')
+const fs = require('fs');
 
+const Turtle = require('./turtle_class')
 
+// -------------------------------------------------------------------------------
+// -------------------------  RUN BELOW CODE OR SIMILAR  -------------------------
+// -------------------------------------------------------------------------------
+
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-p
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-a
+//  $ node turtle.js --output=drawing.txt f10-r-f10-r-f10-r-f10
+// -------------------------------------------------------------------------------
+// ---------------------------  END OF SUGGESTED CODE  ---------------------------
+// -------------------------------------------------------------------------------
+
+console.log(`line 17, arr: \"${arr}\"`)
 let fileName;
 if (arr[1]) {
+    console.log(`line 20, arr[1]: \"${arr[1]}\"`)
+    console.log(`line 21, arr[0]: \"${arr[0]}\"`)
     let newArr = arr[0].split('=')
-    fileName = newArr[1] 
+    console.log(`line 23, newArr: \"${newArr}\"`)
+    fileName = newArr[1] ? newArr[1] : newArr[0] 
+    if(newArr[1]) {arr[1] += '-p'}
     arr.shift();
 }
+console.log(`line 28, fileName: \"${fileName}\"`)
 
 if (arr.length > 0) {
     directionsStr = arr[0];
+    console.log(`line 32, directionsStr : \"${directionsStr}\"`)
     const runTurtle = (directionsStr) => {
         let directionsArr = directionsStr.split('-');
+        console.log(`line 35, directionsArr: \"${directionsArr}\"`)
         let tom;
         if (directionsArr[0].length > 2) {
             let nums = directionsArr[0].replace(/\D/g, '');
@@ -22,6 +41,7 @@ if (arr.length > 0) {
             arrXY[1] = parseInt(arrXY[1]);
             tom = new Turtle(arrXY[0],arrXY[1]);
             directionsArr.shift()
+            console.log(`line 44, directionsArr: \"${directionsArr}\"`)
         }
         else {
             tom = new Turtle(0,0);
@@ -35,13 +55,17 @@ if (arr.length > 0) {
         for (let i = 0; i < directionsArr.length; i++) {
             
             let currentLetter = directionsArr[i].slice().replace(/\d/g, '');
+            console.log(`line 58, currentLetter: \"${currentLetter}\"`)
             let currentNumber = parseInt(directionsArr[i].slice().replace(/\D/g, ''));
-            let funcArr = [currentLetter, currentNumber];
+            console.log(`line 60, currentNumber: \"${currentNumber}\"`)
+            let funcArr = !isNaN(currentNumber) ? [currentLetter, currentNumber] : [currentLetter]; // changed this line from let funcArr = [currentLetter, currentNumber];
+            console.log(`line 62, funcArr: \"${funcArr}\"`)
             // let funcArr = directionsArr[i].split('');
             // funcArr[0] = funcArr[0].toLowerCase();
             if (funcArr[0] === 'f') {
                 funcArr.shift();
                 tom.forward(parseInt(funcArr.join('')));
+                // console.log(`line 54, tom.forward: \"${tom.forward}\"`)
             }
             else if (funcArr[0] === 'r') {
                 tom.right();
@@ -50,45 +74,66 @@ if (arr.length > 0) {
                 tom.left();
             }
             else if (funcArr[0] === 'a') {
+                console.log(`line 77, funcArr[0]: \"${funcArr[0]}\"`)
+                console.log(`line 78, fileName: \"${fileName}\"`)
                 if (fileName) {
-                    fs.writeFile(`./${fileName}`, tom.allPoints(), function(err) {
+                    fs.writeFile(`./${fileName}`, `${tom.allPoints()}`, function(err) {
+                        console.log(`line 81, tom.allPoints(): \"${tom.allPoints()}\"`)
                         if(err) {
-                            return console.log(err);
-                        }
-                        console.log(`Drawing written to ${fineName}`)
-                    });
-                }
-                else {
-                console.log(tom.allPoints());
-                }
-            }
-            else if (funcArr[0] === 'p') {
-                if (fileName) {
-                    fs.writeFile(`./${fileName}`, tom.print(), function(err) {
-                        if(err) {
+                            console.log(`line 83, writeFile err: \"${err}\"`)
                             return console.log(err);
                         }
                         console.log(`Drawing written to ${fileName}`)
                     });
                 }
                 else {
-                console.log(tom.print());
+                    console.log(`line 90, else tom.allPoints()`)
+                    console.log(tom.allPoints());
+                }
+            }
+            else if (funcArr[0] === 'p') {
+                console.log(`line 95, funcArr[0]: \"${funcArr[0]}\"`)
+                if (fileName) {
+                    console.log(`line 97, fileName: \"${fileName}\"`)
+                    fs.writeFile(`./${fileName}`, tom.print(), function(err) {
+                        console.log(`line 99, tom.print(): \"${tom.print()}\"`)
+                        if(err) {
+                            console.log(`101, writeFile err: \"${err}\"`)
+                            return console.log(err);
+                        }
+                        console.log(`Drawing written to ${fileName}`)
+                    });
+                }
+                else {
+                    console.log(`line 108`)
+                    console.log(tom.print());
                 }
             }
         }
     };
+    console.log(`line 114, directionsStr: \"${directionsStr}\"`)
     console.log(runTurtle(directionsStr))
 }
 else {
+    console.log(`line 118`)
     const tom = new Turtle(3,3);
-    console.log(tom.right().right().forward(5)
-        .left().forward(4)
-        .left().forward(3)
-        .left().left().forward(3)
-        .left().forward(4)
-        .left().forward(5)
-        .print());
+    console.log(tom.forward(5).right().forward(8).right().forward(3).left().forward(4).print());
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------  RUN BELOW CODE OR SIMILAR  -------------------------
+// -------------------------------------------------------------------------------
+
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-p
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-a
+//  $ node turtle.js --output=drawing.txt f10-r-f10-r-f10-r-f10
+// -------------------------------------------------------------------------------
+// ---------------------------  END OF SUGGESTED CODE  ---------------------------
+// -------------------------------------------------------------------------------
+
+
+
+
 
 
 

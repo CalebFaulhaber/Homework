@@ -1,12 +1,23 @@
+// -------------------------------------------------------------------------------
+// -------------------------  RUN BELOW CODE OR SIMILAR  -------------------------
+// -------------------------------------------------------------------------------
+
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-p
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-a
+//  $ node turtle.js --output=drawing.txt f10-r-f10-r-f10-r-f10
+// -------------------------------------------------------------------------------
+// ---------------------------  END OF SUGGESTED CODE  ---------------------------
+// -------------------------------------------------------------------------------
+
+
 class Turtle {
     constructor(x,y) {
         this.x = x;
         this.y = y;
         this.arr = [[x,y]];
         this.xy = true;
-        this.pm = [1, 1, -1, -1];
-    }
-    // this is not the easiest way, but it works and is probably just too difficult for mere mortals to understand;
+        this.pm = [1, 1, -1, -1];   // This is not the easiest way, but it works and is probably
+    }                               // just too difficultfor mere mortals to understand.
 
     forward(n) { 
         if (this.xy === true) {
@@ -138,8 +149,24 @@ class Turtle {
     
 };
 
-
-
 module.exports = Turtle;
+
+// -------------------------------------------------------------------------------
+// -------------------------  RUN BELOW CODE OR SIMILAR  -------------------------
+// -------------------------------------------------------------------------------
+
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-p
+//  $ node turtle.js new_turtle.txt t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5-a
+//  $ node turtle.js --output=drawing.txt f10-r-f10-r-f10-r-f10
+// -------------------------------------------------------------------------------
+// ---------------------------  END OF SUGGESTED CODE  ---------------------------
+// -------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
