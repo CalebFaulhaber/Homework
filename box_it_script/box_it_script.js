@@ -1,6 +1,15 @@
 const fs = require('fs');
 const argArr = process.argv.slice(2)
 
+// =========================== RUN SCRIPT SIMILAR TO BELOW ==========================
+// ==================================================================================
+// === $ node box_it_script.js 'Jon Snow' 'Cersei Lannister' 'Daenerys Targaryen' ===
+// ==================================================================================
+// ============================= END OF SCRIPT EXAMPLES =============================
+
+
+
+
 const boxIt = (argArr) => {
     let arr = [...argArr]; // creating new instance of argArr
     let returnArr = []; // array of final strings
